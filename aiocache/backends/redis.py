@@ -58,6 +58,7 @@ class RedisBackend:
         port=6379,
         db=0,
         password=None,
+        ssl=False,
         pool_min_size=1,
         pool_max_size=10,
         loop=None,
@@ -69,6 +70,7 @@ class RedisBackend:
         self.port = int(port)
         self.db = int(db)
         self.password = password
+        self.ssl = ssl
         self.pool_min_size = int(pool_min_size)
         self.pool_max_size = int(pool_max_size)
         self.create_connection_timeout = (
@@ -208,6 +210,7 @@ class RedisBackend:
             if self._pool is None:
                 kwargs = {
                     "db": self.db,
+                    "ssl": self.ssl,
                     "password": self.password,
                     "loop": self._loop,
                     "encoding": "utf-8",
